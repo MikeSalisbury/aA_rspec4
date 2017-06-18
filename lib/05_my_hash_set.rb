@@ -96,6 +96,24 @@ def minus(set2)
   new_hash
 end
 
+
+#Bonus
+def symmetric_difference(set2)
+  new_hash = MyHashSet.new
+  shared = self.intersect(set2)
+  @store.each do |k, v|
+    new_hash.insert(k) unless shared.include?(k)
+  end
+  set2.store.each do |k, v|
+    new_hash.insert(k) unless shared.include?(k)
+  end
+  new_hash
+end
+
+def ==(object)
+object.store == @store
+end
+
 end
 # Bonus
 #

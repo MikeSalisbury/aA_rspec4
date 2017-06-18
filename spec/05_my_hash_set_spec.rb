@@ -100,5 +100,36 @@ describe MyHashSet do
         )
       end
     end
+    # Bonus
+    #
+    # - Write a `set1#symmetric_difference(set2)` method; it should return the
+    #   elements contained in either `set1` or `set2`, but not both!
+    describe "#symmetric_difference" do
+      it "returns a new set" do
+        expect(set1.symmetric_difference(set2)).to be_a(MyHashSet)
+      end
+
+      it "returns a set that includes all elements included in set1 and set2 but not in both" do
+        expect(set1.symmetric_difference(set2).to_a).to contain_exactly(
+          "Mark Hamill",
+          "Harrison Ford",
+          "Ewan McGregor",
+          "Natalie Portman"
+        )
+      end
+    end
+
+    # - Write a `set1#==(object)` method. It should return true if `object` is
+    #   a `MyHashSet`, has the same size as `set1`, and every member of
+    #   `object` is a member of `set1`.
+    describe "#==" do
+      it "returns true if set1 == set2" do
+        expect(set1 == set2).to be_falsey
+      end
+
+      it "returns true if set1 == set1" do
+        expect(set1 == set1).to be_truthy
+      end
+    end
   end
 end
