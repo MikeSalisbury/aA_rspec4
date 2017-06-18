@@ -29,8 +29,74 @@
 # all the items of `set1` that aren't in `set2`.
 
 class MyHashSet
+attr_reader :store
+
+def initialize
+  @store = Hash.new
 end
 
+def insert(el)
+  @store[el] = true
+end
+
+def include?(el)
+  @store.keys.include?(el)
+end
+
+def delete(el)
+  if @store.include?(el)
+    @store.delete(el)
+    return true
+  else
+    return false
+  end
+end
+
+def to_a
+  @store.keys
+end
+
+def union(set2)
+  new_hash = MyHashSet.new
+  # @store.each do |k, v|
+  #   new_hash.insert(k)
+  # end
+  # set2.store.each do |k, v|
+  #   new_hash.insert(k)
+  # end
+  # set2.to_a.each do |k|
+  #   new_hash.insert(k)
+  # end
+  merged_sets = @store.merge(set2.store).keys
+  merged_sets.each do |k|
+    new_hash.insert(k)
+  end
+new_hash
+end
+
+def intersect(set2)
+  new_hash = MyHashSet.new
+  @store.each do |k, v|
+    if set2.to_a.include?(k)
+      new_hash.insert(k)
+    end
+  end
+  new_hash
+
+end
+# Write a `set1#minus(set2)` method which returns a new set which includes
+# all the items of `set1` that aren't in `set2`.
+def minus(set2)
+  new_hash = MyHashSet.new
+  @store.each do |k, v|
+    if !set2.store[k]
+      new_hash.insert(k)
+    end
+  end
+  new_hash
+end
+
+end
 # Bonus
 #
 # - Write a `set1#symmetric_difference(set2)` method; it should return the
